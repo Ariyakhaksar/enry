@@ -1,13 +1,28 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { FaRegUser } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaBars, FaRegUser } from "react-icons/fa";
+import LinkList from "./LinkList";
+import { MdClose } from "react-icons/md";
+import LinkListMobile from "./LinkListMobile";
 
 function FixHeader() {
+   const [toggleMenu, setToggleMenu] = useState(false);
    return (
-      <div className="fixHeader">
-         <div className="container mx-auto flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center gap-8">
+      <div className="fixHeader transition-all ease-out">
+         <div className="container mx-auto flex flex-row items-center justify-around lg:justify-between">
+            <div className="flex flex-row gap-3 lg:gap-8 items-center">
+               <div className="inline-block lg:hidden">
+                  <button
+                     className="flex flex-row gap-3 items-center
+                        active:scale-95 text-xl
+                        hover:bg-second hover:shadow-lg hover:text-white transition-all ease-out
+                        font-bold text-optionalColor px-3 py-2 rounded-md"
+                     onClick={() => setToggleMenu(!toggleMenu)}
+                  >
+                     {!toggleMenu ? <FaBars /> : <MdClose />}
+                  </button>
+               </div>
                <div>
                   <Image
                      src={"/image/logo.png"}
@@ -16,36 +31,28 @@ function FixHeader() {
                      height={33}
                   />
                </div>
-               <div>
-                  <ul className="font-bold text-optionalColor flex flex-row gap-7">
-                     <li className="hover:text-main transition-all ease-in">
-                        <Link href={"/"}>خانه</Link>
-                     </li>
-                     <li>
-                        <Link href={"/"}>خدمات</Link>
-                     </li>
-                     <li>
-                        <Link href={"/"}>املاک</Link>
-                     </li>
-                     <li>
-                        <Link href={"/"}>درباره ما</Link>
-                     </li>
-                     <li>
-                        <Link href={"/"}>ارتباط با ما</Link>
-                     </li>
-                  </ul>
+               <div className="hidden lg:inline-block">
+                  <LinkList />
                </div>
             </div>
             <div>
-                <div>
-                    <button className="flex flex-row gap-3 items-center hover:bg-second hover:text-white transition-all ease-out
-                        border border-optionalColor font-bold text-optionalColor px-4 py-2 rounded-md">
-                        حساب کاربری
-                        <span><FaRegUser /></span>
-
-                    </button>
-                </div>
+               <div>
+                  <button
+                     className="flex flex-row gap-3 items-center
+                        active:scale-95
+                        hover:bg-second hover:shadow-lg hover:text-white transition-all ease-out
+                        border border-optionalColor font-bold text-optionalColor px-4 py-2 rounded-md"
+                  >
+                     حساب کاربری
+                     <span>
+                        <FaRegUser />
+                     </span>
+                  </button>
+               </div>
             </div>
+         </div>
+         <div className="lg:hidden inline-block">
+            <LinkListMobile toggle={toggleMenu} />
          </div>
       </div>
    );

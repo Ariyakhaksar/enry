@@ -7,7 +7,7 @@
       @apply flex bg-second w-full py-3 text-white text-sm lg:text-base;
    }
    .fixHeader {
-      @apply flex py-6 bg-white;
+      @apply flex flex-col lg:flex-row py-5 bg-white;
    }
    .LiIcons {
       @apply transition-all ease-out hover:-translate-y-1;
