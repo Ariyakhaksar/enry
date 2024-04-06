@@ -1,7 +1,7 @@
 import zxcvbn from "zxcvbn";
 
 import { hash, compare } from "bcryptjs";
-import { SignInData, SignUpData } from "@/types/user";
+// import { SignInData, SignUpData } from "@/types/user";
 
 async function hashPassword(password: string) {
    const hashedPassword = await hash(password, 12);
@@ -48,66 +48,53 @@ const passwordScore = (password: string) => {
    };
 };
 
-const validate = (values: SignUpData) => {
-   const errors = { fullName: "", email: "", password: "" };
+// const validate = (values: {}) => {
+//    const errors = { fullName: "", email: "", password: "" };
 
-   if (!values.fullName) {
-      errors.fullName = "لطفا فیلد نام و نام خانوادگی را وارد کنید !";
-   } else if (values.fullName.length < 3) {
-      errors.fullName = "نام و نام خانوادگی باید بیشتر از 3 حرف باشد";
-   }
+//    if (!values.fullName) {
+//       errors.fullName = "لطفا فیلد نام و نام خانوادگی را وارد کنید !";
+//    } else if (values.fullName.length < 3) {
+//       errors.fullName = "نام و نام خانوادگی باید بیشتر از 3 حرف باشد";
+//    }
 
+//    if (!values.email) {
+//       errors.email = "لطفا فیلد ایمیل را وارد !";
+//    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+//       errors.email = "لطفا یک ایمیل معتبر وارد کنید";
+//    }
+
+//    if (!values.password) {
+//       errors.password = "لطفا یک پسورد برای حساب خود وارد کنید !";
+//    } else if (values.password.length <= 6) {
+//       errors.password = "پسورد شما باید حداقل شامل 7 حرف باشد ";
+//    } else if (passwordScore(values.password).paswordScore < 2) {
+//       errors.password = "لطفا پسورد قوی تری وارد کنید - حداقل سطح متوسط";
+//    }
+//    if (
+//       errors.fullName.length === 0 &&
+//       errors.email.length === 0 &&
+//       errors.password.length === 0
+//    ) {
+//       return {};
+//    }
+//    return errors;
+// };
+const validateLogin = (values: { email: string; password: string }) => {
+   const errors = { email: "", password: "" };
    if (!values.email) {
       errors.email = "لطفا فیلد ایمیل را وارد !";
-   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = "لطفا یک ایمیل معتبر وارد کنید";
    }
-
-   if (!values.password) {
-      errors.password = "لطفا یک پسورد برای حساب خود وارد کنید !";
-   } else if (values.password.length <= 6) {
-      errors.password = "پسورد شما باید حداقل شامل 7 حرف باشد ";
-   } else if (passwordScore(values.password).paswordScore < 2) {
-      errors.password = "لطفا پسورد قوی تری وارد کنید - حداقل سطح متوسط";
-   }
-   if (
-      errors.fullName.length === 0 &&
-      errors.email.length === 0 &&
-      errors.password.length === 0
-   ) {
-      return {};
-   }
-   return errors;
-};
-const validateLogin = (values: SignInData) => {
-   const errors = { emailOrMobile: "", password: "" };
-   if (!values.emailOrMobile) {
-      errors.emailOrMobile = "لطفا فیلد ایمیل را وارد !";
-   } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.emailOrMobile)
-   ) {
-      if (!/^[0-9]+$/.test(values.emailOrMobile)) {
-         errors.emailOrMobile =
-            "لطفا یک ایمیل  یا شماره موبایل معتبر وارد کنید !";
-      } else if (values.emailOrMobile.length !== 10) {
-         if (values.emailOrMobile.length !== 11) {
-            errors.emailOrMobile =
-               "لطفا یک ایمیل  یا شماره موبایل معتبر وارد کنید !";
-         } else if (values.emailOrMobile.charAt(0) !== "0") {
-            errors.emailOrMobile =
-               "لطفا یک ایمیل  یا شماره موبایل معتبر وارد کنید !";
-         }
-      }
+    else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+      errors.email = "لطفا یک ایمیل معتبر وارد کنید !";
    }
 
    if (!values.password) {
       errors.password = "لطفا فیلد پسورد را وارد !";
    }
 
-
-   if (errors.emailOrMobile.length === 0 && errors.password.length === 0) {
+   if (errors.email.length === 0 && errors.password.length === 0) {
       return {};
    }
    return errors;
 };
-export { hashPassword, verifyPassword, validate, passwordScore , validateLogin };
+export { hashPassword, verifyPassword, passwordScore, validateLogin };
