@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaBars, FaRegUser } from "react-icons/fa";
+import { FaBars, FaKey, FaRegUser } from "react-icons/fa";
 import LinkList from "./LinkList";
 import { MdClose } from "react-icons/md";
 import LinkListMobile from "./LinkListMobile";
+import Link from "next/link";
 
 function FixHeader() {
    const [toggleMenu, setToggleMenu] = useState(false);
@@ -37,17 +38,18 @@ function FixHeader() {
             </div>
             <div>
                <div>
-                  <button
+                  <Link
                      className="flex flex-row gap-3 items-center
                         active:scale-95
                         hover:bg-second hover:shadow-lg hover:text-white transition-all ease-out
                         border border-optionalColor font-bold text-optionalColor px-4 py-2 rounded-md"
+                     href={'/auth/signin'}
                   >
-                     حساب کاربری
+                     ورود / ثبت نام
                      <span>
-                        <FaRegUser />
+                        <FaKey />
                      </span>
-                  </button>
+                  </Link>
                </div>
             </div>
          </div>

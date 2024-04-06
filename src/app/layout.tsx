@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { KalamehWeb } from "@/utils/fonts";
-import Providers from "@/providers/providers";
+import Providers from "@/providers/Providers";
 
 export const metadata: Metadata = {
    title: "انری | سامانه خرید و اجاره ملک",

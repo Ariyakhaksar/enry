@@ -1,4 +1,4 @@
-import Layouts from "@/components/layouts/layouts";
+import Layouts from "@/components/layouts/Layouts";
 import React from "react";
 
 type Props = Readonly<{

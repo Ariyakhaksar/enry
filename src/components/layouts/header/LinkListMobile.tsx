@@ -7,7 +7,6 @@ type Props = {
 };
 
 const LinkListMobile = ({ toggle }: Props) => {
-   console.log(toggle);
    const refmenu = useRef<HTMLUListElement>(null);
    const refContainermenu = useRef<HTMLDivElement>(null);
    useEffect(() => {
