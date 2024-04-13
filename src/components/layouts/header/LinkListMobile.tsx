@@ -20,7 +20,7 @@ const LinkListMobile = ({ toggle }: Props) => {
       }
    }, [toggle]);
    return (
-      <div
+      <aside
          className={`w-full transition-all ease-in delay-150 mt-3 overflow-hidden ${
             toggle ? "mb-5" : " h-0"
          }`}
@@ -41,7 +41,7 @@ const LinkListMobile = ({ toggle }: Props) => {
                </li>
             ))}
          </ul>
-      </div>
+      </aside>
    );
 };
 

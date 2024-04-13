@@ -18,6 +18,7 @@ const config: Config = {
          transparent: "transparent",
          current: "currentColor",
          zinc: colors.zinc,
+         red: colors.red,
          white: "#ffffff",
          black: "#262E2E",
          main: "#E13833",

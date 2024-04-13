@@ -31,6 +31,53 @@
       direction: ltr;
       @apply border-none outline-none bg-zinc-100 rounded-sm py-2 px-3 text-left w-full;
    }
+   .HeaderDashboard {
+      @apply container mx-auto flex flex-col justify-center items-center gap-5 sm:flex-row sm:justify-between py-5;
+   }
+
+   .HeaderDashboard p.day {
+      @apply text-base font-normal flex-row gap-3 items-center;
+   }
+   .TextWelcome {
+      @apply flex items-center gap-5;
+   }
+   .TextWelcome p {
+      @apply font-bold text-2xl;
+   }
+   .DateBox {
+      @apply flex flex-row gap-5;
+   }
+   .DateBox p {
+      @apply flex flex-row gap-2 items-center;
+   }
+   .DateBox p.p_clock {
+      @apply w-[150px];
+   }
+   /* .SidebarLayout {
+      @apply bg-zinc-100 rounded-md rounded-b-none flex flex-col items-center p-5 h-[72vh]
+      transition-all ease-linear;
+   }
+   .SidebarLayout .ToggleSideBar{
+      @apply w-full flex items-center justify-start
+   }
+   .SidebarLayout .ToggleSideBar .IconSideBar{
+      transform: rotate(-90deg) !important;
+      @apply text-xl 
+   }
+   .SidebarLayout .ToggleSideBar .IconSideBar_Open{
+      transform: rotate(90deg) !important;
+      @apply text-xl 
+   }
+   .SidebarLayout ul{
+      margin-top: 20px !important ;
+      @apply flex flex-col gap-1 items-center
+   }
+   .SidebarLayout ul li{
+      @apply w-full px-2 py-1 flex flex-row justify-center items-center
+   }
+   .SidebarLayout ul li .LinkSidebar{
+      @apply flex justify-center items-center gap-2 w-full
+   } */
 }
 
 @layer utilities {

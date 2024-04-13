@@ -4,11 +4,15 @@ import SigninForm from "@/components/modules/SigninForm";
 import { validateLogin } from "@/utils/auth";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
+import { SigninType } from "@/types/user";
+import { signIn } from "next-auth/react";
+import Opacity from "@/animation/Opacity";
 
 type Props = {};
 
 const SigninPage = (props: Props) => {
    const [isLoading, setIsLoading] = useState(false);
+   const [signinError, setSigninError] = useState("");
    const router = useRouter();
    const LoginFormik = useFormik({
       initialValues: {
@@ -23,9 +27,19 @@ const SigninPage = (props: Props) => {
    });
    const { handleSubmit, handleChange, values, errors, touched } = LoginFormik;
 
-   async function SubmitHandler(values: { email: string; password: string }) {
-      //
-      console.log(values);
+   async function SubmitHandler(values: SigninType) {
+      const res = await signIn("credentials", {
+         email: values.email,
+         password: values.password,
+         redirect: false,
+      });
+      if (res?.error) {
+         setSigninError(res.error);
+         setIsLoading(false);
+      } else {
+         setSigninError("");
+         setIsLoading(false);
+      }
    }
    return (
       <div className="FormAuth">
@@ -35,6 +49,17 @@ const SigninPage = (props: Props) => {
                <p className="text-optionalColor text-base">
                   برای ورود به حساب کاربری خود فرم زیر را پر کنید!
                </p>
+               <div
+                  className={`bg-red-100 text-red-400 rounded-md 
+                     transition-all ease-in
+                     overflow-hidden ${
+                     signinError ? " h-10 py-2 px-5 " : " h-0 p-0 "
+                  }`}
+               >
+                  {
+                     signinError.length > 0 && <Opacity><span>{signinError}</span></Opacity>
+                  }
+               </div>
             </div>
             <SigninForm
                handleSubmit={handleSubmit}

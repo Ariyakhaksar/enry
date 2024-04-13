@@ -1,11 +1,10 @@
-import React from 'react'
+import SignupPage from "@/components/template/auth/SignupPage";
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const signup = (props: Props) => {
-  return (
-    <div>ثبت نام</div>
-  )
-}
+   return <SignupPage />;
+};
 
-export default signup
+export default signup;
