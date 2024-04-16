@@ -20,7 +20,7 @@ const LinkDashSide = [
    },
    {
       id: 2,
-      title: "ثبت آگهی",
+      title: "ثبت آگهی جدید",
       link: "/dashboard/add",
       icon: <MdOutlinePostAdd />,
       role: "USER",

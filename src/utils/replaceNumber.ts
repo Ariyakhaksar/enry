@@ -4,7 +4,7 @@ const e2p = (s: number | string) =>
 const p2e = (s: any ) =>
    s.toString().replace(/[۰-۹]/g, (d : any) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
 
-const sp = (number: number) => {
+const sp = (number: any) => {
    const seperatedNumber = number
       .toString()
       .match(/(\d+?)(?=(\d{3})+(?!\d)|$)/g);

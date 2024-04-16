@@ -34,7 +34,9 @@ const Sidebar = (props: Props) => {
             </Opacity>
          )}
          <div
-            className={`${toggleSidebar ? "absolute top-0 z-10 sm:static" : " "}`}
+            className={`${
+               toggleSidebar ? "absolute top-0 z-10 sm:static" : " "
+            }`}
             style={{ zIndex: 1000 }}
          >
             <div
@@ -49,7 +51,9 @@ const Sidebar = (props: Props) => {
                >
                   <button
                      onClick={() => setToggleSidebar(!toggleSidebar)}
-                     className={`transition-all ease-in ${toggleSidebar ? 'rotate-90' : '-rotate-90'} text-xl bg-zinc-200 p-2 rounded-md`}
+                     className={`transition-all ease-in ${
+                        toggleSidebar ? "rotate-90" : "-rotate-90"
+                     } text-xl bg-zinc-200 p-2 rounded-md`}
                   >
                      {toggleSidebar ? (
                         <span className="text-xl ">
@@ -69,25 +73,32 @@ const Sidebar = (props: Props) => {
                >
                   {LinkDashSide.map((item) => (
                      <li
-                        className="flex w-full items-center justify-center"
+                        className={`flex w-full items-center ${!toggleSidebar ? 'justify-center' : 'justify-start'}`}
                         key={item.id}
                      >
                         {toggleSidebar ? (
                            <Button
                               color="inherit"
-                              className={`w-full flex justify-start`}
+                              className={`w-full p-0 py-0 block rounded-md`}
+                              
                            >
                               <Opacity>
-                                 <span className="flex flex-row items-center gap-3">
-                                    <span className="text-lg">{item.icon}</span>
-                                    <span>{item.title}</span>
-                                 </span>
+                                 <Link href={item.link} className="w-full px-3 py-2 h-full block rounded-md" style={{width : "100%"}}>
+                                    <span className="flex flex-row items-center gap-3">
+                                       <span className="text-lg">
+                                          {item.icon}
+                                       </span>
+                                       <span>{item.title}</span>
+                                    </span>
+                                 </Link>
                               </Opacity>
                            </Button>
                         ) : (
                            <Tooltip title={item.title} placement="left-start">
                               <IconButton aria-label="home">
-                                 <span className="text-lg">{item.icon}</span>
+                                 <Link href={item.link}>
+                                    <span className="text-lg">{item.icon}</span>
+                                 </Link>
                               </IconButton>
                            </Tooltip>
                         )}
