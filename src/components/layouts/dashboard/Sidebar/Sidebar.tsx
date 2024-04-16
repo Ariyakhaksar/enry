@@ -37,7 +37,7 @@ const Sidebar = (props: Props) => {
             className={`${
                toggleSidebar ? "absolute top-0 z-10 sm:static" : " "
             }`}
-            style={{ zIndex: 1000 }}
+            style={{ zIndex: 20 }}
          >
             <div
                className="bg-zinc-100 rounded-md rounded-b-none flex flex-col items-center p-5 min-h-[72vh]

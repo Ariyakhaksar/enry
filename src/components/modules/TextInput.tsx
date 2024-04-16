@@ -41,7 +41,7 @@ const TextInput = ({
                      name={name}
                      id={name}
                      className="bg-zinc-100 px-3 border border-dashed border-zinc-400
-                    outline-none py-1 w-full sm:w-[300px] rounded-md"
+                     outline-none py-1 w-full sm:w-[300px] rounded-md"
                      min={0}
                   />
                )

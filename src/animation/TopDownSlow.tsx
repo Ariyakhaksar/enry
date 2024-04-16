@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 interface TopDownSlow {
     children : ReactNode
-    y : number[]
+    y? : number[]
 }
 
 function TopDownSlow({ children  , y } : TopDownSlow) {

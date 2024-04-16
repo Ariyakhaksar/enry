@@ -3,11 +3,12 @@ import React from "react";
 import LabelPagesDash from "@/components/modules/LabelPagesDash";
 import TextInput from "@/components/modules/TextInput";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { Formik} from "formik";
+import { Formik } from "formik";
 
 import { ProfileInputs } from "@/constant/Proflie";
 import RadioInputs from "@/components/modules/RadioInputs";
 import ListInputs from "@/components/modules/ListInputs";
+import CustomDatePicker from "@/components/modules/CustomDatePicker";
 
 type Props = {};
 
@@ -26,7 +27,7 @@ const initialValues = {
 
 const AddProfile = (props: Props) => {
    return (
-      <div className="w-full">
+      <div className="w-full overflow-auto">
          <LabelPagesDash title="ثبت آگهی جدید" icon={<MdOutlinePostAdd />} />
          <div className="w-full mt-5 py-4 px-8">
             <Formik
@@ -50,8 +51,13 @@ const AddProfile = (props: Props) => {
                            value={values[item.name]}
                         />
                      ))}
+                     <CustomDatePicker
+                        value={values.constructionDate}
+                        name={"constructionDate"}
+                        handleChange={handleChange}
+                     />
 
-                     <div className="w-full">
+                     <div className="w-full flex flex-col lg:flex-row justify-start gap-14">
                         <RadioInputs
                            name="category"
                            title="دسته بندی"
@@ -59,14 +65,31 @@ const AddProfile = (props: Props) => {
                            handleChange={handleChange}
                         />
                      </div>
-                     <div>
-                        <ListInputs value={values.amenities} title="امکانات رفاهی" lim={5} />
+
+                     <div className="w-full flex flex-col lg:flex-row items-start gap-4 justify-center">
+                        <div className="w-full lg:w-1/2">
+                           <ListInputs
+                              value={values.amenities}
+                              title="امکانات رفاهی"
+                              name="amenities"
+                              lim={5}
+                           />
+                        </div>
+                        <div className="w-full lg:w-1/2">
+                           <ListInputs
+                              value={values.rules}
+                              title="قوانین"
+                              name="rules"
+                              lim={5}
+                           />
+                        </div>
                      </div>
-                     <button type="submit">ثبت</button>
+                     <div className="w-full">
+                        <button type="submit">ثبت</button>
+                     </div>
                   </form>
                )}
             </Formik>
-
          </div>
       </div>
    );
