@@ -3,19 +3,11 @@ import React from "react";
 import LabelPagesDash from "@/components/modules/LabelPagesDash";
 import TextInput from "@/components/modules/TextInput";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { Field, FieldArray, Formik, useFormik } from "formik";
-import {
-   FormControl,
-   FormControlLabel,
-   FormLabel,
-   Radio,
-   RadioGroup,
-   Tooltip,
-} from "@mui/material";
-import { ProfileInputs, profileRadios } from "@/constant/Proflie";
+import { Formik} from "formik";
+
+import { ProfileInputs } from "@/constant/Proflie";
 import RadioInputs from "@/components/modules/RadioInputs";
-import { LuDelete } from "react-icons/lu";
-import { TiDeleteOutline } from "react-icons/ti";
+import ListInputs from "@/components/modules/ListInputs";
 
 type Props = {};
 
@@ -33,16 +25,6 @@ const initialValues = {
 };
 
 const AddProfile = (props: Props) => {
-   // const AddProfileFormik = useFormik({
-   //    initialValues: initialValues,
-   //    onSubmit: (values) => {
-   //       //  test(values)
-   //       console.log(values);
-   //    },
-   // });
-   // const { handleSubmit, handleChange, values, errors, touched } =
-   //    AddProfileFormik;
-
    return (
       <div className="w-full">
          <LabelPagesDash title="ثبت آگهی جدید" icon={<MdOutlinePostAdd />} />
@@ -78,57 +60,7 @@ const AddProfile = (props: Props) => {
                         />
                      </div>
                      <div>
-                        <FieldArray name="amenities">
-                           {({ push, remove }) => (
-                              <>
-                                 <div className="p-5 w-auto border border-zinc-200 rounded-md mt-5">
-                                    <div className="flex gap-4 items-center">
-                                       <h3>امکانات رفاهی</h3>
-                                       <button
-                                          className="bg-second text-zinc-100 px-3 py-1 rounded-sm"
-                                          onClick={() => push("")}
-                                          type="button"
-                                       >
-                                          افزودن
-                                       </button>
-                                    </div>
-                                    {values.amenities.map((_, index) => (
-                                       <div
-                                          key={index}
-                                          className="flex gap-3 justify-start items-center my-5"
-                                       >
-                                          <span className="px-2 py-1 w-10 border-r border-second text-center">
-                                             {index + 1}
-                                          </span>
-                                          <Field
-                                             type="text"
-                                             name={`amenities.${index}`}
-                                             id={`amenities.${index}`}
-                                             className="bg-zinc-100 px-3 border border-dashed border-zinc-400
-                                             outline-none py-1 w-full sm:w-[300px] rounded-md"
-                                          />
-                                          <Tooltip
-                                             title={"حذف"}
-                                             placement="left"
-                                          >
-                                             <button
-                                                onClick={() => remove(index)}
-                                                className="text-red-500 border border-transparent rounded-md
-                                                transition-all ease-in
-                                                border-dashed hover:border-red-500 px-1 py-1"
-                                                type="button"
-                                             >
-                                                <span className="text-2xl">
-                                                   <TiDeleteOutline />
-                                                </span>
-                                             </button>
-                                          </Tooltip>
-                                       </div>
-                                    ))}
-                                 </div>
-                              </>
-                           )}
-                        </FieldArray>
+                        <ListInputs value={values.amenities} title="امکانات رفاهی" lim={5} />
                      </div>
                      <button type="submit">ثبت</button>
                   </form>
