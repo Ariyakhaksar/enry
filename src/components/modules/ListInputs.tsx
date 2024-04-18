@@ -28,9 +28,9 @@ const ListInputs = ({ value, title, name }: Props) => {
                      </button>
                   </div>
                   {value.map((_, index) => (
-                     <Opacity d={0.5}>
+                     <Opacity d={0.5} key={index}>
                         <div
-                           key={index}
+                           
                            className="flex gap-3 justify-start items-center my-5"
                         >
                            <span className="px-2 py-1 w-10 border-r border-second text-center">

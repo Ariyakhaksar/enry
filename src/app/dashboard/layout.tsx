@@ -17,7 +17,7 @@ async function layout({ children }: Props) {
 
    if (!user) {
       signOut();
-      redirect("/auth/signin");
+      return redirect("/auth/signin");
    }
 
    return <DashboardLayout>{children}</DashboardLayout>;

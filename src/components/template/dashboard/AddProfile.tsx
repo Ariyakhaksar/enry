@@ -1,14 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import LabelPagesDash from "@/components/modules/LabelPagesDash";
 import TextInput from "@/components/modules/TextInput";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { Formik } from "formik";
+import { Field, Formik } from "formik";
 
 import { ProfileInputs } from "@/constant/Proflie";
 import RadioInputs from "@/components/modules/RadioInputs";
 import ListInputs from "@/components/modules/ListInputs";
 import CustomDatePicker from "@/components/modules/CustomDatePicker";
+import { Value } from "react-multi-date-picker";
+import { e2p, p2e } from "@/utils/replaceNumber";
 
 type Props = {};
 
@@ -19,13 +21,15 @@ const initialValues = {
    phone: "",
    price: "",
    realState: "",
-   constructionDate: new Date(),
    category: "",
    rules: [],
    amenities: [],
 };
 
 const AddProfile = (props: Props) => {
+   
+   const [dateValue, setDateValue] = useState<Value>(new Date());
+
    return (
       <div className="w-full overflow-auto">
          <LabelPagesDash title="ثبت آگهی جدید" icon={<MdOutlinePostAdd />} />
@@ -33,7 +37,7 @@ const AddProfile = (props: Props) => {
             <Formik
                initialValues={initialValues}
                onSubmit={async (values, actions) => {
-                  console.log(values);
+                  console.log({ ...values, constructionDate: p2e(dateValue!.toString()) });
                   // return await new Promise((res) => setTimeout(res, 500));
                }}
             >
@@ -51,10 +55,12 @@ const AddProfile = (props: Props) => {
                            value={values[item.name]}
                         />
                      ))}
+
                      <CustomDatePicker
-                        value={values.constructionDate}
+                        value={dateValue}
                         name={"constructionDate"}
-                        handleChange={handleChange}
+                        // handleChange={handleChange}
+                        setDateValue={setDateValue}
                      />
 
                      <div className="w-full flex flex-col lg:flex-row justify-start gap-14">

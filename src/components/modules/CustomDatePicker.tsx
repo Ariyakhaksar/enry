@@ -6,35 +6,26 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import "react-multi-date-picker/styles/colors/teal.css";
 import "react-multi-date-picker/styles/layouts/mobile.css";
 import { e2p } from "@/utils/replaceNumber";
+import { Value } from "react-multi-date-picker";
 
 type Props = {
-   value: Date;
-   handleChange: any;
+   value: Value;
+   // handleChange: any;
    name: string;
+   setDateValue: React.Dispatch<React.SetStateAction<Value>>;
 };
 
-const CustomDatePicker = ({ value, handleChange, name }: Props) => {
-   const [date, setDate] = useState<Date | null>(null);
+const CustomDatePicker = ({ value, setDateValue, name }: Props) => {
 
-   useEffect(() => {
-      let timer = setInterval(() => {
-         setDate(new Date());
-      }, 1000);
-      return function cleanup() {
-         clearInterval(timer);
-      };
-   }, []);
    return (
       <div className="flex flex-col gap-4">
          <p>تاریخ ساخت </p>
          <DatePicker
             calendar={persian}
             locale={persian_fa}
-            disabled={!date}
             value={value}
-            onChange={handleChange}
+            onChange={setDateValue}
             name={name}
-            maxDate={date ? e2p(date?.toLocaleDateString("fa-IR")) : ""}
             calendarPosition="bottom-right"
             className="teal rmdp-mobile"
             style={{
