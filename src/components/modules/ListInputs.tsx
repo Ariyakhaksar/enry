@@ -11,7 +11,7 @@ type Props = {
    lim: number;
 };
 
-const ListInputs = ({ value, title, name }: Props) => {
+const ListInputs = ({ value, title, lim, name }: Props) => {
    return (
       <FieldArray name={name}>
          {({ push, remove }) => (
@@ -20,19 +20,22 @@ const ListInputs = ({ value, title, name }: Props) => {
                   <div className="flex gap-4 items-center">
                      <h3>{title}</h3>
                      <button
-                        className="bg-second text-zinc-100 px-3 py-1 rounded-sm"
-                        onClick={() => push("")}
+                        className="bg-second transition-all ease-in text-zinc-100 px-3 py-1 rounded-sm disabled:opacity-40"
+                        onClick={() => {
+                           if (value.length < lim) {
+                              push("");
+                           }
+                        }}
+                        disabled={value.length < lim ? false : true}
                         type="button"
                      >
                         افزودن
                      </button>
+                     <span className="text-sm">حداکثر {lim} مورد </span>
                   </div>
                   {value.map((_, index) => (
                      <Opacity d={0.5} key={index}>
-                        <div
-                           
-                           className="flex gap-3 justify-start items-center my-5"
-                        >
+                        <div className="flex gap-3 justify-start items-center my-5">
                            <span className="px-2 py-1 w-10 border-r border-second text-center">
                               {index + 1}
                            </span>

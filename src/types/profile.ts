@@ -5,10 +5,10 @@ export type ProfileType = {
    phone: string;
    price: string;
    realState: string;
-   constructionDate: Date;
+   constructionDate?: Date;
    category: "villa" | "apartment" | "store" | "office";
-   rules: never[];
-   amenities: never[];
+   rules?: never[];
+   amenities?: never[];
 };
 
 export type ProfileInputsType = {
