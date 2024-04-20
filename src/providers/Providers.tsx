@@ -2,6 +2,7 @@
 import Layouts from "@/components/layouts/Layouts";
 import { KalamehWeb } from "@/utils/fonts";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { SessionProvider } from "next-auth/react";
 
 import React from "react";
 
@@ -15,9 +16,11 @@ const Providers = ({ children }: Props) => {
       },
    });
    return (
-      <ThemeProvider theme={theme}>
-         <Layouts>{children}</Layouts>
-      </ThemeProvider>
+      <SessionProvider>
+         <ThemeProvider theme={theme}>
+            <Layouts>{children}</Layouts>
+         </ThemeProvider>
+      </SessionProvider>
    );
 };
 

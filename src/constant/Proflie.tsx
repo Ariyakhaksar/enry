@@ -1,25 +1,32 @@
 import { ProfileInputsType, profileRadiosType } from "@/types/profile";
+import { FcDepartment, FcHome, FcShop } from "react-icons/fc";
+import { MdApartment } from "react-icons/md";
 
 export const profileRadios : profileRadiosType = [
    {
       id: 0,
       label: "ویلا",
       value: "villa",
+      icon : <FcHome />
    },
    {
       id: 1,
       label: "آپارتمان",
       value: "apartment",
+      icon : <span className="text-second"><MdApartment /></span>
+
    },
    {
       id: 2,
       label: "مغازه",
       value: "store",
+      icon : <FcShop />
    },
    {
       id: 3,
       label: "دفتر",
       value: "office",
+      icon : <FcDepartment />
    },
 ];
 

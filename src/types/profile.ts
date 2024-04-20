@@ -7,8 +7,8 @@ export type ProfileType = {
    realState: string;
    constructionDate?: Date;
    category: "villa" | "apartment" | "store" | "office";
-   rules?: never[];
-   amenities?: never[];
+   rules?: never[] | string[];
+   amenities?: never[] | string[];
 };
 
 export type ProfileInputsType = {
@@ -23,4 +23,5 @@ export type profileRadiosType = {
    id: number;
    label: string;
    value: "villa" | "apartment" | "store" | "office";
+   icon : JSX.Element
 }[];

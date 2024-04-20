@@ -7,9 +7,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaArrowDownWideShort, FaArrowUpWideShort } from "react-icons/fa6";
 
-type Props = {};
+type Props = {RoleUser : string};
 
-const Sidebar = (props: Props) => {
+const Sidebar = ({RoleUser}: Props) => {
    const [toggleSidebar, setToggleSidebar] = useState(false);
    const refmenu = useRef<HTMLUListElement>(null);
    const refContainermenu = useRef<HTMLDivElement>(null);

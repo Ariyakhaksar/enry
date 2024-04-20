@@ -11,6 +11,7 @@ const config: Config = {
       extend: {
          backgroundImage: {
             "hero-pattern": "url('/image/banner/banner-bg1.jpg')",
+            "card-pattern": "url('/image/pattern/pattern00.png')",
          },
       },
       colors: {
@@ -19,6 +20,7 @@ const config: Config = {
          current: "currentColor",
          zinc: colors.zinc,
          red: colors.red,
+         emerald: colors.emerald,
          white: "#ffffff",
          black: "#262E2E",
          main: "#E13833",

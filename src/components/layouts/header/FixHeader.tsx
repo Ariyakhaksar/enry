@@ -1,14 +1,19 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { FaBars, FaKey, FaRegUser } from "react-icons/fa";
+import { FaBars, FaKey, FaRegUser, FaUserAlt } from "react-icons/fa";
 import LinkList from "./LinkList";
 import { MdClose } from "react-icons/md";
 import LinkListMobile from "./LinkListMobile";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import { Button, CircularProgress } from "@mui/material";
 
 function FixHeader() {
+   const { status } = useSession();
+
    const [toggleMenu, setToggleMenu] = useState(false);
+
    return (
       <div className="fixHeader transition-all ease-out">
          <div className="container mx-auto flex flex-row items-center justify-around lg:justify-between">
@@ -38,18 +43,47 @@ function FixHeader() {
             </div>
             <div>
                <div>
-                  <Link
+                  <Button
+                     disabled={status === "loading"}
+                     variant="outlined"
+                     className="flex gap-3 items-center px-4 text-second border-second rounded-md 
+                     hover:border-second font-bold py-2
+                     transition-all ease-in
+                     hover:bg-second hover:text-zinc-100"
+                  >
+                     {status !== "loading" ? (
+                        status === "authenticated" ? (
+                           <>
+                              ورود به پنل مدیریت
+                              <span>
+                                 <FaUserAlt />
+                              </span>
+                           </>
+                        ) : (
+                           <>
+                              ورود / ثبت نام
+                              <span>
+                                 <FaKey />
+                              </span>
+                           </>
+                        )
+                     ) : (
+                        <>
+                           <CircularProgress size={22} color="inherit" />
+                        </>
+                     )}
+                  </Button>
+                  {/* <Link
                      className="flex flex-row gap-3 items-center
                         active:scale-95
                         hover:bg-second hover:shadow-lg hover:text-white transition-all ease-out
                         border border-optionalColor font-bold text-optionalColor px-4 py-2 rounded-md"
-                     href={'/auth/signin'}
-                  >
-                     ورود / ثبت نام
-                     <span>
-                        <FaKey />
-                     </span>
-                  </Link>
+                     href={
+                        status !== "authenticated"
+                           ? "/auth/signin"
+                           : "/dashboard"
+                     }
+                  ></Link> */}
                </div>
             </div>
          </div>

@@ -3,17 +3,18 @@ import React, { useState } from "react";
 import LabelPagesDash from "@/components/modules/LabelPagesDash";
 import TextInput from "@/components/modules/TextInput";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { Field, Formik } from "formik";
-
+import { Formik } from "formik";
 import { ProfileInputs } from "@/constant/Proflie";
 import RadioInputs from "@/components/modules/RadioInputs";
 import ListInputs from "@/components/modules/ListInputs";
 import CustomDatePicker from "@/components/modules/CustomDatePicker";
-import { Value } from "react-multi-date-picker";
-import { e2p, p2e } from "@/utils/replaceNumber";
 import { CircularProgress } from "@mui/material";
 import { FaArrowLeft } from "react-icons/fa";
 import { validateProfile } from "@/utils/profile";
+import ProfileServerPost from "@/server/profile/profileServerPost";
+import MessagesAddProfile from "@/components/modules/MessagesAddProfile";
+import ButtonSubmitForm from "@/components/elements/ButtonSubmitForm";
+import { revalidatePath } from "next/cache";
 
 type Props = {};
 
@@ -36,20 +37,41 @@ const AddProfile = (props: Props) => {
    };
 
    const [isLoading, setIsLoading] = useState(false);
+   const [message, setMeassage] = useState("");
+   const [errorMessage, setErrorMessage] = useState("");
 
    return (
       <div className="w-full overflow-auto">
          <LabelPagesDash title="ثبت آگهی جدید" icon={<MdOutlinePostAdd />} />
+         <MessagesAddProfile
+            message={message}
+            setMeassage={setMeassage}
+            errors={errorMessage}
+            setErrorMessage={setErrorMessage}
+         />
          <div className="w-full mt-5 py-4 px-8">
             <Formik
                initialValues={initialValues}
                validate={validateProfile}
-               onSubmit={async (values, actions) => {
-                  console.log({ ...values, constructionDate: dateValue });
-                  // return await new Promise((res) => setTimeout(res, 500));
+               onSubmit={async (values, { resetForm }) => {
+                  setIsLoading(true);
+                  const res = await ProfileServerPost({
+                     ...values,
+                     constructionDate: dateValue,
+                  });
+                  if (res.errors) {
+                     setIsLoading(false);
+                     setErrorMessage(res.errors);
+                  }
+                  if (res.message) {
+                     setIsLoading(false);
+                     setMeassage(res.message);
+                     resetForm();
+                     revalidatePath('dashboard/my-profiles')
+                  }
                }}
             >
-               {({ values , errors, touched, handleChange, handleSubmit }) => (
+               {({ values, errors, touched, handleChange, handleSubmit }) => (
                   <form
                      onSubmit={handleSubmit}
                      className="w-full flex flex-col sm:flex-row flex-wrap gap-10"
@@ -70,7 +92,6 @@ const AddProfile = (props: Props) => {
                      <CustomDatePicker
                         value={dateValue}
                         name={"constructionDate"}
-                        // handleChange={handleChange}
                         setDateValue={setDateValue}
                      />
 
@@ -80,7 +101,6 @@ const AddProfile = (props: Props) => {
                         value={values.category}
                         handleChange={handleChange}
                      />
-                     {/* <div className="w-full flex flex-col lg:flex-row justify-start gap-14"></div> */}
 
                      <div className="w-full flex flex-col lg:flex-row items-start gap-4 justify-center">
                         <div className="w-full lg:w-1/2">
@@ -100,39 +120,7 @@ const AddProfile = (props: Props) => {
                            />
                         </div>
                      </div>
-                     <div className="w-full flex flex-row justify-start mt-10">
-                        <button
-                           type="submit"
-                           className="flex flex-row gap-3 justify-center items-center
-                              active:scale-95
-                              group 
-                              
-                              bg-second
-                              hover:bg-black hover:shadow-lg text-white transition-all ease-out
-                              border border-second hover:border-black font-bold pr-6 pl-3 py-2 rounded-md
-                              disabled:opacity-40 disabled:pointer-events-none
-                              disabled:bg-black disabled:border-black
-                              "
-                        >
-                           ثبت آگهی
-                           <span
-                              className={` flex items-center justify-center transition-all 
-                                 ease-out group-hover:-translate-x-1 group-hover:text-white group-hover:bg-second 
-                                 p-2 rounded-lg mr-3 ${
-                                    isLoading
-                                       ? "-translate-x-1 text-white bg-second"
-                                       : "bg-white text-second"
-                                 }`}
-                           >
-                              {isLoading ? (
-                                 <CircularProgress size={20} color="inherit" />
-                              ) : (
-                                 <FaArrowLeft />
-                              )}
-                           </span>
-                        </button>
-                        
-                     </div>
+                     <ButtonSubmitForm isLoading={isLoading} />
                   </form>
                )}
             </Formik>

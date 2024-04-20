@@ -20,7 +20,7 @@ async function layout({ children }: Props) {
       return redirect("/auth/signin");
    }
 
-   return <DashboardLayout>{children}</DashboardLayout>;
+   return <DashboardLayout RoleUser={user.role}>{children}</DashboardLayout>;
 }
 
 export default layout;
