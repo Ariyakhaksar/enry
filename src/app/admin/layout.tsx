@@ -16,10 +16,12 @@ async function layout({ children }: Props) {
    const user = await User.findOne({ email: session!.user!.email });
 
    if (!user) {
-      // signOut();
+      //   signOut();
       return redirect("/auth/signin");
    }
-
+   if (user.role !== "ADMIN") {
+      return redirect("/dashboard");
+   }
    return <DashboardLayout RoleUser={user.role}>{children}</DashboardLayout>;
 }
 

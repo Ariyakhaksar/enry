@@ -49,7 +49,7 @@ const ProfileCardDashboard = ({ i }: Props) => {
             })}
          </div>
          <div className="flex flex-col gap-3 border-b pb-5 border-zinc-200">
-            <p>{i.title}</p>
+            <p className="font-bold">{i.title}</p>
             <p>بنگاه : {i.realState}</p>
             <p>آدرس : {i.location}</p>
             <p>قیمت : {sp(i.price)}</p>

@@ -73,7 +73,7 @@ const Sidebar = ({RoleUser}: Props) => {
                >
                   {LinkDashSide.map((item) => (
                      <li
-                        className={`flex w-full items-center ${!toggleSidebar ? 'justify-center' : 'justify-start'}`}
+                        className={`flex ${item.role === "ADMIN" && RoleUser !== item.role && "hidden"} w-full items-center ${!toggleSidebar ? 'justify-center' : 'justify-start'}`}
                         key={item.id}
                      >
                         {toggleSidebar ? (

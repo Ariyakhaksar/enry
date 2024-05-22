@@ -39,6 +39,7 @@ const SigninPage = (props: Props) => {
       } else {
          setSigninError("");
          setIsLoading(false);
+         router.push('/dashboard')
       }
    }
    return (
