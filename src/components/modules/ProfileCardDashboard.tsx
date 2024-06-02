@@ -1,10 +1,12 @@
 import { profileRadios } from "@/constant/Proflie";
+import ProfileServerDelete from "@/server/profile/ProfileServerDelete";
 import { sp } from "@/utils/replaceNumber";
 import { IconButton, Tooltip } from "@mui/material";
 import Link from "next/link";
 import React from "react";
 import { FaPencilAlt, FaRegEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 type Props = {
    i: {
@@ -19,6 +21,37 @@ type Props = {
 };
 
 const ProfileCardDashboard = ({ i }: Props) => {
+   const delHandeler = async (id: string) => {
+      Swal.fire({
+         title: "آیا از حدف این آگهی اطمینان دارید ؟",
+         showCancelButton: true,
+         confirmButtonText: "بله",
+         cancelButtonText: "بیخیال !",
+         confirmButtonColor: "#ef4444",
+      }).then(async (result) => {
+         /* Read more about isConfirmed, isDenied below */
+         if (result.isConfirmed) {
+            const res = await ProfileServerDelete({ id });
+
+            if (res.message && res.status === 200) {
+               Swal.fire({
+                  title: res.message,
+                  confirmButtonColor: "#ef4444",
+                  confirmButtonText: "تایید !",
+                  icon: "success",
+               });
+            } else {
+               Swal.fire({
+                  title: res.error,
+                  confirmButtonColor: "#ef4444",
+                  confirmButtonText: "تایید !",
+                  icon: "error",
+               });
+            }
+         }
+      });
+   };
+
    return (
       <div className="flex flex-col gap-3 w-72 border border-zinc-200 py-3 px-5 bg-card-pattern bg-center bg-white rounded-md">
          <div className="flex flex-row justify-between items-center">
@@ -88,6 +121,7 @@ const ProfileCardDashboard = ({ i }: Props) => {
                </span>
             </button>
             <button
+               onClick={() => delHandeler(i._id)}
                className="flex flex-row gap-3 items-center justify-center
                         active:scale-95
                         group w-full text-sm
@@ -95,7 +129,7 @@ const ProfileCardDashboard = ({ i }: Props) => {
                         hover:bg-black hover:shadow-lg text-white transition-all ease-out
                         border border-main hover:border-black font-bold py-1 rounded-md"
             >
-               حدف آگهی
+               حذف آگهی
                <span className="bg-white mr-5 text-main transition-all ease-out group-hover:-translate-x-1 group-hover:text-white group-hover:bg-main p-2 rounded-lg">
                   <MdDelete />
                </span>

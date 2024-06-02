@@ -67,7 +67,6 @@ const AddProfile = (props: Props) => {
                      setIsLoading(false);
                      setMeassage(res.message);
                      resetForm();
-                     revalidatePath('dashboard/my-profiles')
                   }
                }}
             >

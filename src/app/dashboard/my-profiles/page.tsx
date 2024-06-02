@@ -20,8 +20,10 @@ const page = async (props: Props) => {
       },
    ]);
 
-//    console.log(user.profiles)
-   return <MyProfilesPage profiles={JSON.parse(JSON.stringify(user.profiles))} />;
+   //    console.log(user.profiles)
+   return (
+      <MyProfilesPage profiles={JSON.parse(JSON.stringify(user.profiles))} />
+   );
 };
 
 export default page;

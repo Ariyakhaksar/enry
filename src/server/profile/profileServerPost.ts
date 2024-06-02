@@ -5,6 +5,7 @@ import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
 import { Types } from "mongoose";
 import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 
 type Props = {
    title: string;
@@ -85,13 +86,13 @@ const ProfileServerPost = async (values: Props) => {
          price: +price,
          userId: new Types.ObjectId(user._id),
       });
+      revalidatePath("dashboard/my-profiles");
       return {
          status: 201,
          message:
             "آگهی با موفقیت ثبت شد ! منتظر تایید نهایی از طرف ادمین سایت باشید❤🤞🏻",
          errors: "",
       };
-
    } catch (err) {
       return {
          status: 500,

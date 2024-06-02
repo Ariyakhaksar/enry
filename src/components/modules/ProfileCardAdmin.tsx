@@ -1,4 +1,5 @@
 import { profileRadios } from "@/constant/Proflie";
+import ProfileServerDelete from "@/server/profile/ProfileServerDelete";
 import ProfileServerPublish from "@/server/profile/ProfileServerPublish";
 import { ProfileType } from "@/types/profile";
 import { sp } from "@/utils/replaceNumber";
@@ -46,6 +47,36 @@ const ProfileCardAdmin = ({ i }: Props) => {
          }
       });
    };
+   const delHandeler = async (id: string) => {
+      Swal.fire({
+         title: "آیا از حدف این آگهی اطمینان دارید ؟",
+         showCancelButton: true,
+         confirmButtonText: "بله",
+         cancelButtonText: "بیخیال !",
+         confirmButtonColor: "#ef4444",
+      }).then(async (result) => {
+         /* Read more about isConfirmed, isDenied below */
+         if (result.isConfirmed) {
+            const res = await ProfileServerDelete({ id });
+
+            if (res.message && res.status === 200) {
+               Swal.fire({
+                  title: res.message,
+                  confirmButtonColor: "#ef4444",
+                  confirmButtonText: "تایید !",
+                  icon: "success",
+               });
+            } else {
+               Swal.fire({
+                  title: res.error,
+                  confirmButtonColor: "#ef4444",
+                  confirmButtonText: "تایید !",
+                  icon: "error",
+               });
+            }
+         }
+      });
+   };
 
    const updatedAt = new Date(i.updatedAt);
    return (
@@ -63,12 +94,10 @@ const ProfileCardAdmin = ({ i }: Props) => {
                   </IconButton>
                </Tooltip>
                <Tooltip title={"حذف آگهی"} placement="left-start">
-                  <IconButton>
-                     <Link href={""} className=" text-lg text-red-400">
-                        <span>
-                           <MdDelete />
-                        </span>
-                     </Link>
+                  <IconButton onClick={() => delHandeler(i._id)}>
+                     <span className=" text-lg text-red-400">
+                        <MdDelete />
+                     </span>
                   </IconButton>
                </Tooltip>
             </div>
