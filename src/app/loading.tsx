@@ -1,14 +1,10 @@
-import { CircularProgress } from '@mui/material'
-import React from 'react'
+import LoadingPage from "@/components/elements/Loading";
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 const loading = (props: Props) => {
-  return (
-    <div className='flex justify-center items-center h-[70vh]'>
-      <CircularProgress />
-    </div>
-  )
-}
+   return <LoadingPage />;
+};
 
-export default loading
+export default loading;

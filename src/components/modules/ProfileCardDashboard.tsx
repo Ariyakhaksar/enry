@@ -60,7 +60,7 @@ const ProfileCardDashboard = ({ i }: Props) => {
                placement="left-start"
             >
                <IconButton>
-                  <Link href={""} className=" text-lg">
+                  <Link href={i._id} className=" text-lg">
                      <span>
                         <FaRegEye />
                      </span>

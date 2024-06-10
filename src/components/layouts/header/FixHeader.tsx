@@ -8,9 +8,11 @@ import LinkListMobile from "./LinkListMobile";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Button, CircularProgress } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 function FixHeader() {
    const { status } = useSession();
+   const router = useRouter();
 
    const [toggleMenu, setToggleMenu] = useState(false);
 
@@ -50,6 +52,9 @@ function FixHeader() {
                      hover:border-second font-bold py-2
                      transition-all ease-in
                      hover:bg-second hover:text-zinc-100"
+                     onClick={() => {
+                        router.push("/auth/signin");
+                     }}
                   >
                      {status !== "loading" ? (
                         status === "authenticated" ? (

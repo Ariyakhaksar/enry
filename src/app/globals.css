@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+* {
+   scroll-behavior: smooth;
+}
 @layer components {
    .topHeader {
       @apply flex bg-second w-full py-3 text-white text-sm lg:text-base;
@@ -81,5 +83,4 @@
 }
 
 @layer utilities {
-   
 }

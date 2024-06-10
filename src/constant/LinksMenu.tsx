@@ -7,7 +7,7 @@ const HeaderLinks = [
    {
       id: 1,
       title: "خدمات",
-      link: "/servies",
+      link: "/#services",
    },
    {
       id: 2,
@@ -17,12 +17,12 @@ const HeaderLinks = [
    {
       id: 3,
       title: "درباره ما",
-      link: "/about-us",
+      link: "/#about-us",
    },
    {
       id: 4,
       title: "ارتباط با ما",
-      link: "/contact-us",
+      link: "/#contact-us",
    },
 ];
 
