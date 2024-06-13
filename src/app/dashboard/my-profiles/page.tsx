@@ -20,7 +20,6 @@ const page = async (props: Props) => {
       },
    ]);
 
-   //    console.log(user.profiles)
    return (
       <MyProfilesPage profiles={JSON.parse(JSON.stringify(user.profiles))} />
    );

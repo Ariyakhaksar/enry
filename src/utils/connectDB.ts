@@ -37,15 +37,8 @@ const connectDB = async (): Promise<void> => {
             console.log("Connected to DB 🟢");
          })
          .catch((err) => {
-            console.error(
-               "Failed to connect to MongoDB on startup - retrying in 5 sec",
-               err
-            );
-            if (err.code === "ECONNRESET") {
-               setTimeout(connectWithRetry, 5000);
-            } else {
-               console.error("Non-recoverable error:", err);
-            }
+            console.error("Failed to connect to MongoDB", err);
+            throw new Error("Failed to connect to MongoDB");
          });
    };
 

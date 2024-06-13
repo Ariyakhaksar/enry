@@ -3,13 +3,14 @@ import Opacity from "@/animation/Opacity";
 import { LinkDashSide } from "@/constant/LinksDashSide";
 import { Button, IconButton, Tooltip } from "@mui/material";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { BiHomeAlt } from "react-icons/bi";
 import { FaArrowDownWideShort, FaArrowUpWideShort } from "react-icons/fa6";
 
-type Props = {RoleUser : string};
+type Props = { RoleUser: string };
 
-const Sidebar = ({RoleUser}: Props) => {
+const Sidebar = ({ RoleUser }: Props) => {
    const [toggleSidebar, setToggleSidebar] = useState(false);
    const refmenu = useRef<HTMLUListElement>(null);
    const refContainermenu = useRef<HTMLDivElement>(null);
@@ -25,6 +26,8 @@ const Sidebar = ({RoleUser}: Props) => {
          }
       }
    }, [toggleSidebar]);
+
+   const pathname = usePathname();
 
    return (
       <>
@@ -73,33 +76,61 @@ const Sidebar = ({RoleUser}: Props) => {
                >
                   {LinkDashSide.map((item) => (
                      <li
-                        className={`flex ${item.role === "ADMIN" && RoleUser !== item.role && "hidden"} w-full items-center ${!toggleSidebar ? 'justify-center' : 'justify-start'}`}
+                        className={`flex ${
+                           item.role === "ADMIN" &&
+                           RoleUser !== item.role &&
+                           "hidden"
+                        } w-full items-center ${
+                           !toggleSidebar ? "justify-center" : "justify-start"
+                        }`}
                         key={item.id}
                      >
                         {toggleSidebar ? (
                            <Button
                               color="inherit"
                               className={`w-full p-0 py-0 block rounded-md`}
-                              
                            >
                               <Opacity>
-                                 <Link href={item.link} className="w-full px-3 py-2 h-full block rounded-md" style={{width : "100%"}}>
-                                    <span className="flex flex-row items-center gap-3">
-                                       <span className="text-lg">
+                                 <Link
+                                    href={item.link}
+                                    className={`w-full  h-full block rounded-md`}
+                                    style={{ width: "100%" }}
+                                 >
+                                    <span
+                                       className={`flex flex-row items-center gap-3
+                                          transition-all ease-in px-3 py-2
+                                          border-r-2 
+                                       ${
+                                          pathname === item.link
+                                             ? "text-second border-second"
+                                             : "border-transparent"
+                                       }
+                                       `}
+                                    >
+                                       <span className="text-lg transition-all ease-in">
                                           {item.icon}
                                        </span>
-                                       <span>{item.title}</span>
+                                       <span className="transition-all ease-in">{item.title}</span>
                                     </span>
                                  </Link>
                               </Opacity>
                            </Button>
                         ) : (
                            <Tooltip title={item.title} placement="left-start">
-                              <IconButton aria-label="home">
-                                 <Link href={item.link}>
-                                    <span className="text-lg">{item.icon}</span>
-                                 </Link>
-                              </IconButton>
+                              <Link href={item.link}>
+                                 <IconButton
+                                    aria-label="home"
+                                    sx={{ borderRadius: "7px" }}
+                                    className={` transition-all ease-in
+                                        ${
+                                           pathname === item.link
+                                              ? "text-second text-xl"
+                                              : "text-lg"
+                                        } `}
+                                 >
+                                    <span>{item.icon}</span>
+                                 </IconButton>
+                              </Link>
                            </Tooltip>
                         )}
                      </li>
