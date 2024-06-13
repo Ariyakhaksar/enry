@@ -11,8 +11,8 @@ const HeaderLinks = [
    },
    {
       id: 2,
-      title: "املاک",
-      link: "/ads",
+      title: "دسته بندی املاک",
+      link: "/#ads",
    },
    {
       id: 3,

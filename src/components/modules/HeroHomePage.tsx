@@ -4,6 +4,14 @@ import Link from "next/link";
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import BoxServices from "./BoxServices";
+import ContactUs from "./ContactUs";
+import { PiStrategyBold } from "react-icons/pi";
+import { RiRefund2Line } from "react-icons/ri";
+import { IoStar } from "react-icons/io5";
+import AboutUs from "./AboutUs";
+import { MdApartment } from "react-icons/md";
+import CategoryHomePage from "./CategoryHomePage";
+import { profileCategory } from "@/constant/Proflie";
 
 function HeroHomePage() {
    return (
@@ -70,6 +78,34 @@ function HeroHomePage() {
                />
             </span>
          </section>
+
+         <section
+            id="ads"
+            className="w-full flex flex-col items-center my-10 py-5 gap-5"
+         >
+            <div className="text-center flex flex-col gap-5 items-center">
+               <span className="text-main font-bold">آگهی ها</span>
+               <h3 className="text-4xl font-extrabold text-zinc-700">
+                  دسته بندی آگهی املاک
+               </h3>
+               <p className="max-w-[550px] text-zinc-500 leading-8">
+                  لورم ایپسوم ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم
+                  استاندارد صنعت بوده است. لورم ایپسوم ساختار چاپ و متن را در بر
+                  می گیرد.
+               </p>
+               <span className="h-[0.15rem] w-[50px] bg-main"></span>
+            </div>
+
+            <div className="container mx-auto flex flex-col px-5 lg:flex-row lg:flex-wrap items-center justify-center gap-10">
+               {
+                  profileCategory.map((item) => (
+                     <React.Fragment key={item.id}>
+                        <CategoryHomePage title={item.title} link={item.link} icon={item.icon} />
+                     </React.Fragment>
+                  ))
+               }
+            </div>
+         </section>
          <section
             id="services"
             className="w-full flex flex-col items-center my-10 py-5 gap-5"
@@ -115,23 +151,13 @@ function HeroHomePage() {
             id="contact-us"
             className="w-full py-20 my-10  bg-second relative text-zinc-100"
          >
-            <div className="absolute -top-1 transition-all ease-out bg-[url('/image/shape/shape3.png')] w-full bg-cover h-12"></div>
-            <div className="absolute -bottom-1 transition-all ease-out bg-[url('/image/shape/shape4.png')] w-full bg-cover h-12"></div>
-            <div className="container mx-auto my-5 flex flex-col lg:flex-row gap-y-10 px-5 justify-between items-center">
-               <div className="flex flex-col gap-3 w-full">
-                  <span className="text-main text-base lg:text-lg font-bold">
-                     نقل و قول رایگان
-                  </span>
-                  <h3 className="text-xl lg:text-3xl font-extrabold">
-                     به دنبال یک مشاور خبره از ما هستید؟
-                  </h3>
-               </div>
-               <div className="w-full flex flex-col gap-5 text-zinc-700 bg-white p-5 rounded-md text-center">
-                  {/* <span className="text-zinc-500 text-center my-5">فرم تماس بزودی</span> */}
-                  <h3 className="text-xl font-extrabold text-zinc-800">نقل و قول رایگان</h3>
-                  
-               </div>
-            </div>
+            <ContactUs />
+         </section>
+         <section
+            id="about-us"
+            className="flex flex-col lg:flex-row justify-center gap-x-14 gap-y-5 px-10 my-20"
+         >
+            <AboutUs />
          </section>
       </>
    );

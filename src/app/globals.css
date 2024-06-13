@@ -3,6 +3,10 @@
 @tailwind utilities;
 * {
    scroll-behavior: smooth;
+   outline-color: #104547 !important;
+}
+input ,textarea{
+   outline: none !important;
 }
 @layer components {
    .topHeader {

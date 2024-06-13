@@ -19,6 +19,7 @@ const config: Config = {
          transparent: "transparent",
          current: "currentColor",
          zinc: colors.zinc,
+         green: colors.green,
          red: colors.red,
          emerald: colors.emerald,
          white: "#ffffff",
