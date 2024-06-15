@@ -6,7 +6,7 @@ function Footer() {
     <div className='w-full flex flex-row gap-2 justify-center items-center font-bold bg-zinc-100 py-5'>
       <span>ساخته شده با</span>
       <span className='text-main'><GoHeartFill /></span> 
-      {/* <span>آریا <span className='text-sm'>(علیرضا)</span> خاکسار</span>  */}
+      <span>علیرضا خاکسار</span> 
     </div>
   )
 }
