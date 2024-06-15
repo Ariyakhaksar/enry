@@ -3,28 +3,29 @@
 import Profile from "@/models/Profile";
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
-import { Types } from "mongoose";
+import { ObjectId } from "mongoose";
 import { getServerSession } from "next-auth";
-import { revalidatePath } from "next/cache";
 
 type Props = {
+   _id: ObjectId;
    title: string;
    description: string;
    location: string;
    phone: string;
    price: string;
    realState: string;
-   category: string;
+   category: "villa" | "apartment" | "store" | "office";
    rules: string[];
    amenities: string[];
    constructionDate: Date;
 };
 
-const ProfileServerPost = async (values: Props) => {
+const ProfileServerEdit = async (values: Props) => {
    try {
       await connectDB();
 
       const {
+         _id,
          title,
          description,
          location,
@@ -57,6 +58,7 @@ const ProfileServerPost = async (values: Props) => {
       }
 
       if (
+         !_id ||
          !title ||
          !location ||
          !description ||
@@ -80,27 +82,53 @@ const ProfileServerPost = async (values: Props) => {
          (item) => item.replace(/\s/g, "") !== ""
       );
 
-      const newProfile = await Profile.create({
-         title,
-         description,
-         location,
-         phone,
-         realState,
-         constructionDate,
-         amenities: filteredAmenities,
-         rules: filteredRules,
-         category,
-         price: +price,
-         userId: new Types.ObjectId(user._id),
-      });
-      revalidatePath("dashboard/my-profiles");
+      const profile = await Profile.findOne({ _id: _id });
+
+      if (!profile) {
+         return {
+            status: 400,
+            message: "",
+            errors: " آگهی وجود ندارد !",
+         };
+      }
+      // بررسی مقدار user._id و profile.userId
+      if (!user._id || !profile.userId) {
+         return {
+            status: 400,
+            message: "",
+            errors: "شناسه‌های کاربر یا آگهی نامعتبر است!",
+         };
+      }
+
+      if (!user._id.equals(profile.userId)) {
+         return {
+            status: 403,
+            message: "",
+            errors: "دسترسی شما به این آگهی محدود است!",
+         };
+      }
+      profile.title = title;
+      profile.description = description;
+      profile.location = location;
+      profile.phone = phone;
+      profile.realState = realState;
+      profile.price = price;
+      profile.constructionDate = constructionDate;
+      profile.amenities = filteredAmenities;
+      profile.rules = filteredRules;
+      profile.category = category;
+      profile.published = false;
+
+      profile.save();
+
       return {
-         status: 201,
+         status: 200,
          message:
-            "آگهی با موفقیت ثبت شد ! منتظر تایید نهایی از طرف ادمین سایت باشید❤🤞🏻",
+            "آگهی با ویرایش شد ! منتظر تایید نهایی از طرف ادمین سایت باشید❤🤞🏻",
          errors: "",
       };
    } catch (err) {
+      console.log(err);
       return {
          status: 500,
          message: "",
@@ -109,4 +137,4 @@ const ProfileServerPost = async (values: Props) => {
    }
 };
 
-export default ProfileServerPost;
+export default ProfileServerEdit;

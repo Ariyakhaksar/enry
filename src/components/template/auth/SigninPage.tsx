@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { SigninType } from "@/types/user";
 import { signIn } from "next-auth/react";
 import Opacity from "@/animation/Opacity";
+import { p2e } from "@/utils/replaceNumber";
 
 type Props = {};
 
@@ -29,8 +30,8 @@ const SigninPage = (props: Props) => {
 
    async function SubmitHandler(values: SigninType) {
       const res = await signIn("credentials", {
-         email: values.email,
-         password: values.password,
+         email: p2e(values.email.toLocaleLowerCase()),
+         password: p2e(values.password),
          redirect: false,
       });
       if (res?.error) {
@@ -39,7 +40,7 @@ const SigninPage = (props: Props) => {
       } else {
          setSigninError("");
          setIsLoading(false);
-         router.push('/dashboard')
+         router.push("/dashboard");
       }
    }
    return (
@@ -54,12 +55,14 @@ const SigninPage = (props: Props) => {
                   className={`bg-red-100 text-red-400 rounded-md 
                      transition-all ease-in
                      overflow-hidden ${
-                     signinError ? " h-10 py-2 px-5 " : " h-0 p-0 "
-                  }`}
+                        signinError ? " h-10 py-2 px-5 " : " h-0 p-0 "
+                     }`}
                >
-                  {
-                     signinError.length > 0 && <Opacity><span>{signinError}</span></Opacity>
-                  }
+                  {signinError.length > 0 && (
+                     <Opacity>
+                        <span>{signinError}</span>
+                     </Opacity>
+                  )}
                </div>
             </div>
             <SigninForm

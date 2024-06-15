@@ -1,12 +1,29 @@
 import { UserInfo } from "@/types/user";
+import { signOut } from "next-auth/react";
 import React from "react";
 import { BsCalendar2Date } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
+import { IoLogOut } from "react-icons/io5";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiFolderUserLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 type Props = {
    user: UserInfo;
+};
+
+const logOutUser = async () => {
+   Swal.fire({
+      title: "آیا میخواهید از حساب کاربری خود خارج شوید ؟",
+      showCancelButton: true,
+      confirmButtonText: "بله",
+      cancelButtonText: "بیخیال !",
+      confirmButtonColor: "#ef4444",
+   }).then(async (result) => {
+      if (result.isConfirmed) {
+         await signOut({ callbackUrl: "/auth/signin" });
+      }
+   });
 };
 
 const AccountInfoDashHome = ({ user }: Props) => {
@@ -40,6 +57,25 @@ const AccountInfoDashHome = ({ user }: Props) => {
                {new Date(user.createdAt).toLocaleDateString("fa-IR")}
             </li>
          </ul>
+         <div className="px-5 lg:px-10">
+            <button
+               onClick={logOutUser}
+               className="flex flex-row gap-3 items-center justify-center
+                        active:scale-95
+                        group text-sm
+                        bg-red-500 px-10
+                        hover:bg-black hover:shadow-lg text-white transition-all ease-out
+                        border border-red-500 hover:border-black font-bold py-1 rounded-md"
+            >
+               خروج از حساب کاربری
+               <span
+                  className="bg-white mr-5 text-red-500 transition-all ease-out group-hover:-translate-x-1 group-hover:text-white 
+                  group-hover:bg-red-500 p-2 rounded-lg text-xl"
+               >
+                  <IoLogOut />
+               </span>
+            </button>
+         </div>
       </div>
    );
 };

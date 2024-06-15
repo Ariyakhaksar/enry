@@ -1,3 +1,4 @@
+"use client"
 import { profileRadios } from "@/constant/Proflie";
 import { sp } from "@/utils/replaceNumber";
 import { Tooltip } from "@mui/material";
@@ -46,7 +47,7 @@ const ProfileCardPublic = ({ i }: Props) => {
          </div>
          <div className="flex flex-col items-center justify-center gap-2 border-t py-3 border-zinc-200">
             <Link
-               href={`ads/${i._id}`}
+               href={`/ads/${i._id}`}
                className="flex flex-row gap-3 items-center justify-center
                 active:scale-95
                 group w-full text-sm

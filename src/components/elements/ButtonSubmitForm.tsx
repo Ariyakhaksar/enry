@@ -4,9 +4,10 @@ import { FaArrowLeft } from "react-icons/fa";
 
 type Props = {
    isLoading: boolean;
+   type? : "edit" | "add"
 };
 
-const ButtonSubmitForm = ({ isLoading }: Props) => {
+const ButtonSubmitForm = ({ isLoading , type = "add"}: Props) => {
    return (
       <div className="w-full flex flex-row justify-start mt-10">
          <button
@@ -23,7 +24,10 @@ const ButtonSubmitForm = ({ isLoading }: Props) => {
                               disabled:bg-black disabled:border-black
                               "
          >
-            ثبت آگهی
+            {
+               type === "add" ? <>ثبت آگهی </>: <>ویرایش آگهی</>
+            }
+            
             <span
                className={` flex items-center justify-center transition-all 
                                  ease-out group-hover:-translate-x-1 group-hover:text-white group-hover:bg-second 

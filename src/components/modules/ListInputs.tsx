@@ -5,7 +5,7 @@ import React from "react";
 import { TiDeleteOutline } from "react-icons/ti";
 
 type Props = {
-   value: never[];
+   value: never[] | string[];
    title: string;
    name: string;
    lim: number;

@@ -14,8 +14,14 @@ type Props = {
 const AdsDetailsPage = ({ profile }: Props) => {
    return (
       <section className="container mx-auto flex flex-col lg:flex-row items-start my-10">
-        <Toaster />
-         <div className="w-full px-5">
+         <Toaster />
+
+         <div className="w-full px-5 relative">
+            {!profile.published && (
+               <span className="text-zinc-400 absolute opacity-45 top-1/2 left-1/2 -translate-1/2 text-xl font-bold">
+                  پیشنمایش | آگهی تایید نشده است
+               </span>
+            )}
             <LabelPagesDash title={profile.title} />
             <UlAdsDetails
                realState={profile.realState}
@@ -23,7 +29,7 @@ const AdsDetailsPage = ({ profile }: Props) => {
                createdAt={profile.createdAt}
             />
             <div className="p-5 text-zinc-600 leading-8">
-               <p>{profile.description}</p>
+               <pre>{profile.description}</pre>
             </div>
             <div className="flex flex-col md:flex-row gap-5 lg:p-5">
                <ListAds list={profile.amenities} title="امکانات رفاهی" />

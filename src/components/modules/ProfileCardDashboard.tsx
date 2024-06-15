@@ -59,14 +59,18 @@ const ProfileCardDashboard = ({ i }: Props) => {
                title={i.published ? "نمایش صفحه" : "پیشنمایش آگهی"}
                placement="left-start"
             >
-               <IconButton>
-                  <Link href={i._id} className=" text-lg">
-                     <span>
+               <Link
+                  href={`/ads/${i._id}`}
+                  
+                  target="_blank"
+               >
+                  <IconButton>
+                     <span className=" text-lg">
                         <FaRegEye />
                      </span>
                      {/* پیشنمایش */}
-                  </Link>
-               </IconButton>
+                  </IconButton>
+               </Link>
             </Tooltip>
             {profileRadios.map((r) => {
                if (r.value == i.category) {
@@ -108,7 +112,9 @@ const ProfileCardDashboard = ({ i }: Props) => {
             </p>
          </div>
          <div className="flex flex-col items-center justify-center gap-2">
-            <button
+            <Link
+               href={`/dashboard/my-profiles/edit/${i._id}`}
+               target="_blank"
                className="flex flex-row gap-3 justify-center items-center
                         active:scale-95 
                         group w-full  text-sm
@@ -119,7 +125,7 @@ const ProfileCardDashboard = ({ i }: Props) => {
                <span className="bg-main text-white transition-all ease-out group-hover:-translate-x-1 group-hover:text-main group-hover:bg-white p-2 rounded-lg mr-3">
                   <FaPencilAlt />
                </span>
-            </button>
+            </Link>
             <button
                onClick={() => delHandeler(i._id)}
                className="flex flex-row gap-3 items-center justify-center

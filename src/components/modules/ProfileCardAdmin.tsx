@@ -84,14 +84,14 @@ const ProfileCardAdmin = ({ i }: Props) => {
          <div className="flex flex-row justify-between items-center">
             <div className="flex items-center gap-3">
                <Tooltip title={"پیشنمایش آگهی"} placement="left-start">
-                  <IconButton>
-                     <Link href={""} className=" text-lg">
-                        <span>
+                  <Link href={`/ads/${i._id}`} target="_blank">
+                     <IconButton>
+                        <span className=" text-lg">
                            <FaRegEye />
                         </span>
                         {/* پیشنمایش */}
-                     </Link>
-                  </IconButton>
+                     </IconButton>
+                  </Link>
                </Tooltip>
                <Tooltip title={"حذف آگهی"} placement="left-start">
                   <IconButton onClick={() => delHandeler(i._id)}>

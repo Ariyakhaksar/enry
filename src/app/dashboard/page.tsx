@@ -5,13 +5,15 @@ import { authOptions } from "../api/auth/[...nextauth]/authOptions";
 import User from "@/models/User";
 import HomePageDhashboard from "@/components/template/dashboard/HomePageDhashboard";
 import { UserInfo } from "@/types/user";
+import { redirect } from "next/navigation";
+import FindUser from "@/server/user/FindUser";
 
 async function page() {
    await connectDB();
    const session = await getServerSession(authOptions);
-   const user: UserInfo | null = await User.findOne({
-      email: session!.user!.email,
-   });
+   if (!session) return redirect("/auth/signin");
+
+   const user: UserInfo = await FindUser(session.user?.email);
 
    const [Puser] = await User.aggregate([
       { $match: { email: session!.user!.email } },

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { profileCategory } from "@/constant/Proflie";
 import { Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -17,7 +17,9 @@ type Props = {
 const UlAdsDetails = ({ realState, createdAt, category }: Props) => {
    const [url, setUrl] = useState("");
    useEffect(() => {
-      setUrl(window.location.href);
+      if (typeof window !== undefined) {
+         setUrl(window.location.href);
+      }
    }, []);
    return (
       <ul className="flex gap-5 p-5 cursor-default">
@@ -53,8 +55,11 @@ const UlAdsDetails = ({ realState, createdAt, category }: Props) => {
                     active:scale-[0.9]"
             >
                <CopyToClipboard text={url}>
-                  <button className="flex gap-3 items-center cursor-pointer py-2 px-3"
-                  onClick={() => {toast.success(" آدرس آگهی با موفقیت کپی شد !")}}
+                  <button
+                     className="flex gap-3 items-center cursor-pointer py-2 px-3"
+                     onClick={() => {
+                        toast.success(" آدرس آگهی با موفقیت کپی شد !");
+                     }}
                   >
                      <span className="text-xl">
                         <FaShare />

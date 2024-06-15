@@ -7,11 +7,7 @@ import React from "react";
 type Props = {};
 
 const signin = async (props: Props) => {
-   const session = await getServerSession();
 
-   if (session) {
-      return redirect("/dashboard");
-   }
    return <SigninPage />;
 };
 

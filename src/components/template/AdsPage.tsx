@@ -2,13 +2,14 @@
 import Opacity from "@/animation/Opacity";
 import { profileCategory } from "@/constant/Proflie";
 import Profile from "@/models/Profile";
-import { Tooltip } from "@mui/material";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import ProfileCardPublic from "@/components/modules/ProfileCardPublic";
+import NothingForShow from "../modules/NothingForShow";
+import { FaRegFaceSadTear } from "react-icons/fa6";
 
 type Profile = {
    _id: string;
@@ -73,8 +74,8 @@ const AdsPage = ({ profiles }: Props) => {
                            <li
                               className={`px-5 py-1 text-center w-full rounded-md transition-all ease-out ${
                                  category &&
-                                 category === item.key &&
-                                 "bg-second  text-zinc-50"
+                                 category === item.key ?
+                                 "bg-second  text-zinc-50" : " "
                               }`}
                               key={item.id}
                            >
@@ -85,10 +86,19 @@ const AdsPage = ({ profiles }: Props) => {
                   </div>
                </div>
             </div>
-            <div className="w-auto justify-center lg:justify-start flex flex-wrap gap-x-10 gap-y-5">
-               {profiles.map((i) => (
-                  <ProfileCardPublic i={i} key={i._id} />
-               ))}
+            <div className="w-full justify-center lg:justify-start flex flex-wrap gap-x-10 gap-y-5">
+               {profiles.length > 0 ? (
+                  profiles.map((i) => <ProfileCardPublic i={i} key={i._id} />)
+               ) : (
+                  <div className="mx-auto w-full my-10">
+                     <NothingForShow
+                        title={<>هیچ آگهی ثبت نشده است !</>}
+                        icon={<FaRegFaceSadTear />}
+                        link={"/"}
+                        textLink="بازگشت به صفحه اصلی"
+                     />
+                  </div>
+               )}
             </div>
          </section>
       </>

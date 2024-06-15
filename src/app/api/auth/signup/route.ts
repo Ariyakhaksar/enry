@@ -1,6 +1,7 @@
 import User from "@/models/User";
 import { hashPassword } from "@/utils/auth";
 import connectDB from "@/utils/connectDB";
+import { p2e } from "@/utils/replaceNumber";
 
 export async function POST(req: Request) {
    try {
@@ -26,9 +27,11 @@ export async function POST(req: Request) {
 
       const hashedPassword = await hashPassword(password);
 
+      const emailUser = p2e(email.toLocaleLowerCase())
+
       const newUser = await User.create({
-         email: email,
-         password: hashedPassword,
+         email: emailUser,
+         password: p2e(hashedPassword),
       });
 
       return Response.json(

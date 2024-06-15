@@ -8,6 +8,9 @@
 input ,textarea{
    outline: none !important;
 }
+pre{
+   font-family: inherit;
+}
 @layer components {
    .topHeader {
       @apply flex bg-second w-full py-3 text-white text-sm lg:text-base;

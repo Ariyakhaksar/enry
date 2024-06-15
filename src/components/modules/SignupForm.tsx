@@ -162,7 +162,7 @@ const SignupForm = ({
                type="submit"
                disabled={isLoading}
             >
-               ورود
+               ساخت حساب کاربری
                <span
                   className={` flex items-center justify-center transition-all 
                     ease-out group-hover:-translate-x-1 group-hover:text-white group-hover:bg-second 

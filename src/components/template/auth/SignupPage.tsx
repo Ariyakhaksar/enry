@@ -9,6 +9,7 @@ import { validateRegister } from "@/utils/auth";
 import { signIn } from "next-auth/react";
 import InOut from "@/animation/InOut";
 import SuccessAlertRegister from "@/components/modules/SuccessAlertRegister";
+import { p2e } from "@/utils/replaceNumber";
 
 type Props = {};
 
@@ -44,7 +45,9 @@ const SignupPage = (props: Props) => {
       console.log(data);
       if (res.status === 201) {
          setSignupError("");
-         signinUser(values);
+         setTimeout(() => {
+            signinUser(values);
+         }, 1000);
       } else {
          setSignupError(data.error);
          setIsLoading(false);
@@ -53,12 +56,12 @@ const SignupPage = (props: Props) => {
 
    async function signinUser(values: SigninType) {
       const res = await signIn("credentials", {
-         email: values.email,
-         password: values.password,
+         email: p2e(values.email),
+         password: p2e(values.password),
          redirect: false,
       });
       if (res?.error) {
-         setSignupError(res.error);
+         setSignupError("مشکلی در سمت سرور پیش آمده است !");
          setIsLoading(false);
       } else {
          setSignupError("");

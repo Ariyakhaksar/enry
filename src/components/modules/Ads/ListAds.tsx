@@ -21,7 +21,7 @@ const ListAds = ({ list, title }: Props) => {
                ))
             ) : (
                <li className="text-zinc-500 text-center w-full my-2">
-                  امکانات رفاهی برای این آگهی ثبت نشده است !
+                  {title} برای این آگهی ثبت نشده است !
                </li>
             )}
          </ul>

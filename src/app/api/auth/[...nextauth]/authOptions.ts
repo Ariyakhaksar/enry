@@ -10,6 +10,14 @@ export const authOptions: NextAuthOptions = {
    session: { strategy: "jwt" },
    providers: [
       CredentialsProvider({
+         credentials: {
+            email: {
+               label: "Email",
+               type: "text",
+               placeholder: "jsmith@example.com",
+            },
+            password: { label: "Password", type: "password" },
+         },
          async authorize(credentials) {
             const { email: Iemail, password } = credentials as SigninType;
             try {
@@ -19,24 +27,30 @@ export const authOptions: NextAuthOptions = {
             }
 
             // Check valid Data
-            if (!Iemail || !password)
+            if (!Iemail || !password) {
                throw new Error("لطفا اطلاعات معتبر وارد کنید !");
+            }
 
             const ePassword = p2e(password);
             const email = p2e(Iemail.toLowerCase());
 
             // Check Exist User
             const user = await User.findOne({ email });
-            if (!user) throw new Error("لطفا ابتدا حساب کاربری ایجاد کنید !");
+            if (!user) {
+               throw new Error("لطفا ابتدا حساب کاربری ایجاد کنید !");
+            }
 
             // Check password
             const isValid = await verifyPassword(ePassword, user.password);
-            if (!isValid) throw new Error("ایمیل یا رمز عبور اشتباه است!");
+            if (!isValid) {
+               throw new Error("ایمیل یا رمز عبور اشتباه است!");
+            }
 
             return {
-               name: "",
-               email,
-               image: "",
+               id: user._id.toString(),
+               name: user.name,
+               email: user.email,
+               image: user.image || "",
             };
          },
       }),
