@@ -88,7 +88,7 @@ function HeroHomePage() {
                <h3 className="text-4xl font-extrabold text-zinc-700">
                   دسته بندی آگهی املاک
                </h3>
-               <p className="max-w-[550px] text-zinc-500 leading-8">
+               <p className="max-w-[550px] text-zinc-500 leading-8 px-5">
                   لورم ایپسوم ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم
                   استاندارد صنعت بوده است. لورم ایپسوم ساختار چاپ و متن را در بر
                   می گیرد.
@@ -115,7 +115,7 @@ function HeroHomePage() {
                <h3 className="text-4xl font-extrabold text-zinc-700">
                   خدمات اختصاصی ما
                </h3>
-               <p className="max-w-[550px] text-zinc-500 leading-8">
+               <p className="max-w-[550px] text-zinc-500 leading-8 p-5">
                   لورم ایپسوم ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم
                   استاندارد صنعت بوده است. لورم ایپسوم ساختار چاپ و متن را در بر
                   می گیرد.

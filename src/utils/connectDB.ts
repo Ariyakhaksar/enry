@@ -12,7 +12,8 @@ const connectDB = async (): Promise<void> => {
       console.log("Attempting to connect to MongoDB... 🟠");
       mongoose
          .connect(
-            process.env.MONGO_URI as string,
+            
+            process.env.NEXT_PUBLIC_MONGO_URI as string,
             {
                useNewUrlParser: true,
                useUnifiedTopology: true,
@@ -28,7 +29,7 @@ const connectDB = async (): Promise<void> => {
          });
    };
 
-   if (typeof process.env.MONGO_URI === "string") {
+   if (typeof process.env.NEXT_PUBLIC_MONGO_URI === "string") {
       connectWithRetry();
    } else {
       console.error("MONGO_URI is not defined or not a string.");

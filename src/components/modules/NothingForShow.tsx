@@ -14,7 +14,7 @@ const NothingForShow = ({ icon, title, link, textLink }: Props) => {
       <>
          <p
             className="w-full flex gap-5 flex-row justify-center 
-                font-bold text-2xl py-5 mt-10 text-zinc-400 select-none
+                font-bold text-lg lg:text-2xl py-5 mt-10 text-zinc-400 select-none
                 items-center"
          >
             {title}

@@ -15,7 +15,7 @@ const HomeCard = ({
    countVerificationProfile,
 }: Props) => {
    return (
-      <div className="w-full flex gap-10 px-10 flex-col lg:flex-row justify-around my-10 select-none">
+      <div className="w-full flex gap-10 px-10 flex-col lg:flex-row lg:justify-around my-10 select-none">
          <div className="w-full bg-zinc-800 rounded-md text-zinc-100 p-6 px-10 flex justify-center">
             <div className="w-full flex flex-col gap-y-5 md:flex-row justify-between items-center">
                <div className="flex">

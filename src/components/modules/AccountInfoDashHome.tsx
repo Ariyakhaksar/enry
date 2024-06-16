@@ -57,13 +57,13 @@ const AccountInfoDashHome = ({ user }: Props) => {
                {new Date(user.createdAt).toLocaleDateString("fa-IR")}
             </li>
          </ul>
-         <div className="px-5 lg:px-10">
+         <div className="px-5 lg:px-10 mb-10">
             <button
                onClick={logOutUser}
                className="flex flex-row gap-3 items-center justify-center
                         active:scale-95
                         group text-sm
-                        bg-red-500 px-10
+                        bg-red-500 px-4 lg:px-10
                         hover:bg-black hover:shadow-lg text-white transition-all ease-out
                         border border-red-500 hover:border-black font-bold py-1 rounded-md"
             >

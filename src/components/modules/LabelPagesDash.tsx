@@ -20,7 +20,7 @@ const LabelPagesDash = ({ title, icon }: Props) => {
                ease: [0, 1, 0.3, 1.0],
             }}
          ></motion.span>
-         <h1 className="text-2xl flex gap-2 items-center text-second font-bold">
+         <h1 className="text-xl lg:text-2xl flex gap-2 items-center text-second font-bold">
             <span>{icon ? icon : <></>}</span>
             &nbsp; {title}
          </h1>

@@ -12,7 +12,8 @@ type Props = Readonly<{
 const Providers = ({ children }: Props) => {
    const theme = createTheme({
       typography: {
-         fontFamily: "Kalameh",
+         // fontFamily: "Kalameh",
+         fontFamily: "var(--font-kalameh)",
       },
    });
    return (
